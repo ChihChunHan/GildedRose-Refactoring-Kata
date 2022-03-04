@@ -17,29 +17,26 @@ class Item {
   decreaseSellIn() {
     this.sellIn = this.sellIn - 1;
   }
-  updateDefaultItemQuality() {
-    this.decreaseQuality();
-    if (this.sellIn < 1) {
-      this.decreaseQuality();
-    }
+  updateBrieQuality() {
+    this.decreaseSellIn();
+    this.increaseQuality();
+    if (this.sellIn < 0) this.increaseQuality();
   }
   updateBackstagePassQuality() {
+    this.decreaseSellIn();
     this.increaseQuality();
-    if (this.sellIn < 11) {
-      this.increaseQuality();
-    }
-    if (this.sellIn < 6) {
-      this.increaseQuality();
-    }
-    if (this.sellIn < 1) {
-      this.quality = 0;
-    }
+    if (this.sellIn < 10) this.increaseQuality();
+    if (this.sellIn < 5) this.increaseQuality();
+    if (this.sellIn < 0) this.quality = 0;
   }
-  updateBrieQuality() {
-    this.increaseQuality();
-    if (this.sellIn < 1) {
-      this.increaseQuality();
-    }
+  updateConjuredQuality() {
+    this.updateDefaultItemQuality();
+    this.updateDefaultItemQuality();
+  }
+  updateDefaultItemQuality() {
+    this.decreaseSellIn();
+    this.decreaseQuality();
+    if (this.sellIn < 0) this.decreaseQuality();
   }
   updateItemQuality() {
     switch (this.name) {
@@ -52,14 +49,12 @@ class Item {
         this.updateBackstagePassQuality();
         break;
       case "Conjured Mana Cake":
-        this.updateDefaultItemQuality();
-        this.updateDefaultItemQuality();
+        this.updateConjuredQuality();
         break;
       default:
         this.updateDefaultItemQuality();
         break;
     }
-    this.decreaseSellIn();
   }
 }
 
