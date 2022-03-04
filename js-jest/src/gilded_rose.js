@@ -25,21 +25,14 @@ class Shop {
       if (item.name == "Sulfuras, Hand of Ragnaros") {
         return;
       }
-      if (
-        item.name == "Aged Brie" ||
-        item.name == "Backstage passes to a TAFKAL80ETC concert" 
-      ) {
+      if (item.name == "Aged Brie") {
         this.increaseQuality(item);
-        if (
-          item.name == "Backstage passes to a TAFKAL80ETC concert" &&
-          item.sellIn < 11
-        ) {
+      } else if (item.name == "Backstage passes to a TAFKAL80ETC concert") {
+        this.increaseQuality(item);
+        if (item.sellIn < 11) {
           this.increaseQuality(item);
         }
-        if (
-          item.name == "Backstage passes to a TAFKAL80ETC concert" &&
-          item.sellIn < 6
-        ) {
+        if (item.sellIn < 6) {
           this.increaseQuality(item);
         }
       } else {
