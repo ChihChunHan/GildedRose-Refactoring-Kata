@@ -4,21 +4,24 @@ class Item {
     this.sellIn = sellIn;
     this.quality = quality;
   }
+  increaseQuality() {
+    if (this.quality < 50) {
+      this.quality = this.quality + 1;
+    }
+  }
+  decreaseQuality() {
+    if (this.quality > 0) {
+      this.quality = this.quality - 1;
+    }
+  }
+  decreaseSellIn() {
+    this.sellIn = this.sellIn - 1;
+  }
 }
 
 class Shop {
   constructor(items = []) {
     this.items = items;
-  }
-  increaseQuality(item) {
-    if (item.quality < 50) {
-      item.quality = item.quality + 1;
-    }
-  }
-  decreaseQuality(item) {
-    if (item.quality > 0) {
-      item.quality = item.quality - 1;
-    }
   }
   updateQuality() {
     this.items.forEach((item) => {
@@ -26,30 +29,30 @@ class Shop {
         case "Sulfuras, Hand of Ragnaros":
           break;
         case "Aged Brie":
-          this.increaseQuality(item);
-          item.sellIn = item.sellIn - 1;
+          item.increaseQuality();
+          item.decreaseSellIn();
           if (item.sellIn < 0) {
-            this.increaseQuality(item);
+            item.increaseQuality();
           }
           break;
         case "Backstage passes to a TAFKAL80ETC concert":
-          this.increaseQuality(item);
+          item.increaseQuality();
           if (item.sellIn < 11) {
-            this.increaseQuality(item);
+            item.increaseQuality();
           }
           if (item.sellIn < 6) {
-            this.increaseQuality(item);
+            item.increaseQuality();
           }
-          item.sellIn = item.sellIn - 1;
+          item.decreaseSellIn();
           if (item.sellIn < 0) {
             item.quality = item.quality - item.quality;
           }
           break;
         default:
-          this.decreaseQuality(item);
-          item.sellIn = item.sellIn - 1;
+          item.decreaseQuality();
+          item.decreaseSellIn();
           if (item.sellIn < 0) {
-            this.decreaseQuality(item);
+            item.decreaseQuality();
           }
           break;
       }
