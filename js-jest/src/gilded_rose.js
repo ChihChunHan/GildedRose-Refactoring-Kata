@@ -39,6 +39,14 @@ class Item {
           this.quality = 0;
         }
         break;
+      case "Conjured Mana Cake":
+        this.decreaseQuality();
+        this.decreaseQuality();
+        if (this.sellIn < 1) {
+          this.decreaseQuality();
+          this.decreaseQuality();
+        }
+        break;
       default:
         this.decreaseQuality();
         if (this.sellIn < 1) {
